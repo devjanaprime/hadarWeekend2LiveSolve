@@ -15,7 +15,27 @@ function readyNow(){
         }; // end objectToSend
         console.log( 'objectToSend:', objectToSend ); 
         // send object to server with AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/doMath',
+            data: objectToSend
+        }).done( function( response ){
+            console.log( 'back from POST with:', response );
+            getAnswer();
+        }); // end ajax
         // display answer on DOM
     }); // end doMathButton on click
 
 } // end ready now
+
+function getAnswer(){
+    $.ajax({
+        type: 'GET',
+        url: '/answer'
+    }).done( function( response ){
+        console.log( 'back from GET with:', response );
+        let outputDiv = $( '#answerOut' );
+        outputDiv.empty();
+        outputDiv.append( response.answer );
+    }); // end get answer
+} // end getAnswer
