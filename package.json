@@ -1,0 +1,24 @@
+{
+  "name": "hadar_weekend2_live_solve",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devjanaprime/hadarWeekend2LiveSolve.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devjanaprime/hadarWeekend2LiveSolve/issues"
+  },
+  "homepage": "https://github.com/devjanaprime/hadarWeekend2LiveSolve#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  }
+}
