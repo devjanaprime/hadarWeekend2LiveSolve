@@ -28,5 +28,6 @@ part03
 part 04
 ---
 
+- clear button
 - history array on server
 - history display on DOM

@@ -3,7 +3,9 @@ let express = require( 'express' );
 let app = express();
 let bodyParser = require( 'body-parser' );
 let calculate = require( './modules/calculate.js' );
+// global variables
 let mostRecentAnswer = 0;
+let calculateHistory = [];
 // uses
 app.use( bodyParser.urlencoded( { extended: true } ) );
 // look server/public 1st 
@@ -23,8 +25,15 @@ app.get( '/answer', function( req, res ){
 
 app.post( '/doMath', function( req, res ){
     console.log( 'in /doMath POST:', req.body );
+    // send req.body to calculate module & hold answer in global variable
     mostRecentAnswer = calculate( req.body );
+    // save this request in the calculate history
+    calculateHistory.push( req.body );
     console.log( 'answer:', mostRecentAnswer );
     res.sendStatus( 200 );
 }); // end /doMath POST
 
+app.get( '/history', function( req, res ){
+    console.log( 'in /history GET' );
+    res.send( calculateHistory );
+}); //end /history GET

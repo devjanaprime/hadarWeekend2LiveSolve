@@ -3,6 +3,9 @@ $( document ).ready( readyNow ); //end doc ready
 function readyNow(){
     $( '#clearButton' ).on( 'click', function(){
         console.log( 'in clearButton on click' );
+        // target inputs by ID and clear text
+        $( '#xIn' ).val( '' );
+        $( '#yIn' ).val( '' );
     }); // end clearButton on click
 
     $( '#doMathButton' ).on( 'click', function(){
@@ -26,6 +29,8 @@ function readyNow(){
         // display answer on DOM
     }); // end doMathButton on click
 
+    // page init
+    getHistory();
 } // end ready now
 
 function getAnswer(){
@@ -37,5 +42,29 @@ function getAnswer(){
         let outputDiv = $( '#answerOut' );
         outputDiv.empty();
         outputDiv.append( response.answer );
+        getHistory();
     }); // end get answer
 } // end getAnswer
+
+function getHistory(){
+    // ajax call to /history
+    $.ajax({
+        type: 'GET',
+        url: '/history'
+    }).done( function( response ){
+        console.log( response );
+        // target the output element
+        let outputElement = $( '#historyOut' );
+        outputElement.empty();
+        for( let i = 0; i<response.length; i++ ) {
+            console.log(  response[i] );
+            let outputString = '<li>';
+            outputString += response[i].x + ' ';
+            outputString += response[i].type + ' ';
+            outputString += response[i].y;
+            outputString += '</li>';
+            outputElement.append( outputString );
+        } //end for
+    }); //end ajax
+    // display history on DOM
+} //end getHistory
